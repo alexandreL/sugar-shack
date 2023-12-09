@@ -116,5 +116,5 @@
             }
         }
     },
-    "tags": ["type:app", "scope:database", "platform:node"]
+    "tags": ["scope:backend"]
 }

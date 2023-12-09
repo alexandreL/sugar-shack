@@ -11,6 +11,7 @@
     },
     "devDependencies": {
         "@nuxt/devtools": "latest",
+        "@nuxtjs/eslint-config-typescript": "^12.1.0",
         "@nuxtjs/eslint-module": "^4.1.0",
         "@nuxtjs/tailwindcss": "^6.10.1",
         "nuxt": "^3.8.2",
@@ -28,7 +29,7 @@
         }
     },
     "tags": [
-        "scope:marketplace"
+        "scope:fullstack"
     ],
     "implicitDependencies": [
         "tag:scope:marketplace"

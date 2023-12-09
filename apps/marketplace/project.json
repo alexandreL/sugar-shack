@@ -1,0 +1,17 @@
+{
+    "name": "marketplace",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "root": "apps/marketplace",
+    "sourceRoot": "apps/marketplace/src",
+    "projectType": "application",
+    "targets": {
+        "lint": {
+            "executor": "@nx/eslint:lint",
+            "outputs": ["{options.outputFile}"],
+            "options": {
+                "fix": true
+            }
+        }
+    },
+    "tags": ["scope:frontend"]
+}

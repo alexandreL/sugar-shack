@@ -1,0 +1,17 @@
+{
+    "name": "bo",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "root": "apps/bo",
+    "sourceRoot": "apps/bo/src",
+    "projectType": "application",
+    "targets": {
+        "lint": {
+            "executor": "@nx/eslint:lint",
+            "outputs": ["{options.outputFile}"],
+            "options": {
+                "fix": true
+            }
+        }
+    },
+    "tags": ["scope:frontend"]
+}
