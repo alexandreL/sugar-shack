@@ -9,7 +9,9 @@
     "importHelpers": true,
     "target": "ES2019",
     "module": "esnext",
-    "lib": ["dom"],
+    "lib": [
+      "dom"
+    ],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
@@ -25,9 +27,19 @@
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
     "paths": {
-      "@sugar-shack/shared": ["libs/shared/src/index.ts"],
-      "@sugar-shack/ui": ["libs/ui/src/index.ts"]
+      "@sugar-shack/shared": [
+        "libs/shared/src/index.ts"
+      ],
+      "@sugar-shack/ui": [
+        "libs/ui/src/index.ts"
+      ],
+      "@sugar-shack/entity": [
+        "libs/entity/src/index.ts"
+      ]
     }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
 }
