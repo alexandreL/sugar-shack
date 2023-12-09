@@ -47,3 +47,4 @@ Thumbs.db
 .nitro
 .cache
 dist
+db.sqlite
