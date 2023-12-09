@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import { CreateUserDto } from '@sugar-shack/shared'
+import { EditUserDto } from '@sugar-shack/shared'
 import { InjectRepository } from '@nestjs/typeorm'
 import { User } from '@sugar-shack/entity'
 import { Repository } from 'typeorm'
@@ -13,7 +13,7 @@ export class UserService {
     ) {
     }
 
-    async create(createUserDto: CreateUserDto) {
+    async create(createUserDto: EditUserDto) {
         const hashedPassword = await hash(createUserDto.password)
         return this.usersRepository.save(this.usersRepository.create({ ...createUserDto, hashedPassword }))
     }
@@ -26,7 +26,7 @@ export class UserService {
         return this.usersRepository.findOneBy({ id })
     }
 
-    update(id: number, updateUserDto: CreateUserDto) {
+    update(id: number, updateUserDto: EditUserDto) {
         return this.usersRepository.update(id, updateUserDto)
     }
 

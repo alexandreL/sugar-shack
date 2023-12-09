@@ -1,0 +1,120 @@
+{
+    "name": "database-migrations",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "",
+    "projectType": "application",
+    "targets": {
+        "clean": {
+            "executor": "nx:run-commands",
+            "options": {
+                "commands": [
+                    {
+                        "command": "rm -rf dist/apps/database-migrations"
+                    }
+                ],
+                "cwd": "."
+            }
+        },
+        "build": {
+            "executor": "@nx/esbuild:esbuild",
+            "outputs": ["{options.outputPath}"],
+            "dependsOn": ["clean"],
+            "options": {
+                "outputPath": "dist/apps/database-migrations",
+                "format": ["cjs"],
+                "main": "apps/database-migrations/src/ormconfig.ts",
+                "tsConfig": "apps/database-migrations/tsconfig.app.json",
+                "assets": ["apps/database-migrations/src/assets"],
+                "external": ["typeorm", "pg"],
+                "thirdParty": true
+            }
+        },
+        "gen": {
+            "executor": "nx:run-commands",
+            "dependsOn": ["build"],
+            "options": {
+                "commands": [
+                    "npx ts-node -P ./apps/database-migrations/tsconfig.app.json ./node_modules/typeorm/cli.js migration:generate -d ./apps/database-migrations/src/ormconfig.ts ./apps/database-migrations/src/migration/{args.name}",
+                    "echo \"export * from './{args.name}'\" >> ./apps/database-migrations/src/migration/index.ts"
+                ],
+                "cwd": ".",
+                "parallel": false
+            }
+        },
+        "new": {
+            "executor": "nx:run-commands",
+            "dependsOn": ["build"],
+            "options": {
+                "commands": [
+                    "npx ts-node -P ./apps/database-migrations/tsconfig.app.json ./node_modules/typeorm/cli.js migration:create ./apps/database-migrations/src/migration/{args.name}",
+                    "echo \"export * from './{args.name}'\" >> ./apps/database-migrations/src/migration/index.ts"
+                ],
+                "cwd": ".",
+                "parallel": false
+            }
+        },
+        "revert-last": {
+            "executor": "nx:run-commands",
+            "dependsOn": ["build"],
+            "options": {
+                "commands": [
+                    "npx ts-node -P ./apps/database-migrations/tsconfig.app.json ./node_modules/typeorm/cli.js migration:revert  -d ./apps/database-migrations/src/ormconfig.ts"
+                ],
+                "cwd": ".",
+                "parallel": false
+            }
+        },
+        "migrate": {
+            "executor": "nx:run-commands",
+            "dependsOn": ["build"],
+            "options": {
+                "commands": [
+                    "npx ts-node -P ./apps/database-migrations/tsconfig.app.json ./node_modules/typeorm/cli.js migration:run -d ./apps/database-migrations/src/ormconfig.ts"
+                ],
+                "cwd": ".",
+                "parallel": false
+            },
+            "configurations": {
+                "fake": {
+                    "commands": [
+                        "npx ts-node -P ./apps/database-migrations/tsconfig.app.json ./node_modules/typeorm/cli.js migration:run -d ./apps/database-migrations/src/ormconfig.ts --fake"
+                    ]
+                }
+            }
+        },
+        "lint": {
+            "executor": "@nx/eslint:lint",
+            "options": {
+                "lintFilePatterns": ["apps/database-migrations/**/*.ts", "apps/database-migrations/**/*.html"],
+                "fix": true
+            }
+        },
+        "script-run": {
+            "executor": "nx:run-commands",
+            "options": {
+                "commands": [
+                    "npx ts-node -P ./apps/database-migrations/tsconfig.app.json ./apps/database-migrations/src/script/{args.script}"
+                ],
+                "cwd": ".",
+                "parallel": false
+            }
+        },
+        "new-local": {
+            "executor": "nx:run-commands",
+            "options": {
+                "commands": ["docker compose up db_restore"],
+                "cwd": "./apps/database-migrations",
+                "parallel": false
+            }
+        },
+        "start-local": {
+            "executor": "nx:run-commands",
+            "options": {
+                "commands": ["docker compose up db"],
+                "cwd": "./apps/database-migrations",
+                "parallel": false
+            }
+        }
+    },
+    "tags": ["type:app", "scope:database", "platform:node"]
+}

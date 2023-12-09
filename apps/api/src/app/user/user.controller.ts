@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Param, Patch, Post, UseGuards } from '@nestjs/common'
 import { AuthGuard } from '@nestjs/passport'
 import { UserService } from './user.service'
-import { CreateUserDto } from '@sugar-shack/shared'
+import { EditUserDto } from '@sugar-shack/shared'
 
 @Controller('user')
 export class UserController {
@@ -10,13 +10,13 @@ export class UserController {
 
     @UseGuards(AuthGuard('jwt'))
     @Post()
-    create(@Body() createUserDto: CreateUserDto) {
+    create(@Body() createUserDto: EditUserDto) {
         return this.userService.create(createUserDto)
     }
 
     @UseGuards(AuthGuard('jwt'))
     @Patch(':id')
-    update(@Param('id') id: string, @Body() updateUserDto: CreateUserDto) {
+    update(@Param('id') id: string, @Body() updateUserDto: EditUserDto) {
         return this.userService.update(+id, updateUserDto)
     }
 

@@ -1,0 +1,32 @@
+version: '3'
+services:
+    db:
+        image: postgres:16.1-alpine
+        env_file:
+            - ../../.env.local
+        volumes:
+            - ./dumps:/dumps
+            - db_data:/var/lib/postgresql/data
+        ports:
+            - "6969:5432"
+        environment:
+            POSTGRES_DB: ${DB_DATABASE}
+            POSTGRES_USER: ${DB_USERNAME}
+            POSTGRES_PASSWORD: ${DB_PASSWORD}
+
+    db_restore:
+        image: postgres:16.1-alpine
+        env_file:
+            - ../../.env.local
+        volumes:
+            - ./dumps:/dumps
+        environment:
+            POSTGRES_DB: ${DB_DATABASE}
+            POSTGRES_USER: ${DB_USERNAME}
+            POSTGRES_PASSWORD: ${DB_PASSWORD}
+        command: >
+            bash -c "sleep 5 ; PGPASSWORD=$$DB_PASSWORD psql -d $$DB_DATABASE -U $$DB_USERNAME -h db -c 'DROP SCHEMA IF EXISTS public CASCADE ;' && PGPASSWORD=$$DB_PASSWORD psql --single-transaction -d $$DB_DATABASE -U $$DB_USERNAME -h db --file=/dumps/db.dump"
+        depends_on:
+            - db
+volumes:
+    db_data:
