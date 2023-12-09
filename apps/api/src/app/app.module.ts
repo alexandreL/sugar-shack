@@ -7,6 +7,8 @@ import { UserModule } from './user/user.module'
 import { AuthModule } from './auth/auth.module'
 import * as entities from '@sugar-shack/entity'
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies'
+import { OrderModule } from './order/order.module'
+import { ProductModule } from './product/product.module'
 
 @Module({
     imports: [
@@ -14,7 +16,7 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies'
             type: 'sqlite',
             database: 'db.sqlite',
             namingStrategy: new SnakeNamingStrategy(),
-            entities: entities
+            entities: entities,
         }),
         // TypeOrmModule.forRoot({
         //     type: 'postgres',
@@ -29,11 +31,12 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies'
         // })
         UserModule,
         AuthModule,
+        OrderModule,
+        ProductModule,
     ],
     controllers: [ AppController ],
-    providers: [ ],
+    providers: [],
 })
 export class AppModule {
-    constructor(private dataSource: DataSource) {
-    }
+    constructor(private dataSource: DataSource) {}
 }

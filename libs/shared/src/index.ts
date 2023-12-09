@@ -1,5 +1,6 @@
 export * from './user/edit-user.dto'
 export * from './user/public-user.dto'
+export * from './user/auth-user.dto'
 export * from './enum/SyrupType'
 export * from './enum/OrderStatus'
 export * from './order/order.dto'

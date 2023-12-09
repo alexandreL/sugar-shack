@@ -2,18 +2,12 @@ import { IsEmail, IsInt, IsNotEmpty, IsString } from 'class-validator'
 
 export class PublicUserDto {
     @IsInt()
-    id
+    id?: number
 
     @IsEmail()
     @IsNotEmpty()
-    email
+    email!: string
 
     @IsString()
-    firstName
-
-    constructor() {
-        this.email = ''
-        this.firstName = ''
-        this.id = 0
-    }
+    firstName?: string
 }

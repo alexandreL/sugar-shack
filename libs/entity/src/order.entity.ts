@@ -4,8 +4,8 @@ import { OrderStatus } from '@sugar-shack/shared'
 
 @Entity()
 export class Order {
-    @PrimaryGeneratedColumn()
-    id?: number
+    @PrimaryGeneratedColumn('uuid')
+    uuid?: string
 
     @Column()
     customerName?: string

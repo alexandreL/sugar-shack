@@ -1,10 +1,10 @@
-import { IsEnum, IsInt, IsNotEmpty, IsString, ValidateNested } from 'class-validator'
+import { IsEnum, IsNotEmpty, IsString, ValidateNested } from 'class-validator'
 import { OrderLineDto } from './orderLine.dto'
 import { OrderStatus } from '../enum/OrderStatus'
 
 export class OrderDto {
-    @IsInt()
-    id?: number
+    @IsString()
+    uuid?: string
 
     @IsString()
     customerName?: string

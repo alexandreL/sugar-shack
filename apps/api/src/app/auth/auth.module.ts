@@ -8,6 +8,7 @@ import { JwtStrategy } from './jwt.strategy'
 import { UserService } from '../user/user.service'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { User } from '@sugar-shack/entity'
+import { AuthController } from './auth.controller'
 
 
 @Module({
@@ -20,7 +21,8 @@ import { User } from '@sugar-shack/entity'
             signOptions: { expiresIn: '1d' },
         }),
     ],
-    providers: [ JwtService, UserService, AuthService, LocalStrategy, JwtStrategy ],
+    controllers: [ AuthController ],
+    providers: [ UserService, AuthService, LocalStrategy, JwtStrategy ],
 })
 export class AuthModule {
 }

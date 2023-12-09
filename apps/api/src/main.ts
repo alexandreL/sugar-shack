@@ -16,6 +16,7 @@ async function bootstrap() {
     app.useGlobalPipes(new ValidationPipe())
 
     const config = new DocumentBuilder()
+        .addCookieAuth('access-key')
         .setTitle('sugar-shark-api')
         .setDescription('The sugar-shark-api API description')
         .setVersion('1.0')

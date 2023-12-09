@@ -1,7 +1,7 @@
 {
     "name": "database-migrations",
     "$schema": "../../node_modules/nx/schemas/project-schema.json",
-    "sourceRoot": "",
+    "sourceRoot": ".",
     "projectType": "application",
     "targets": {
         "clean": {
