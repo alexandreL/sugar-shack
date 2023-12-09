@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common'
 import { OrderService } from './order.service'
 import { OrderDto } from '@sugar-shack/shared'
-import { ApiSecurity } from '@nestjs/swagger'
+import { ApiBearerAuth } from '@nestjs/swagger'
 import { JwtAuthGuard } from '../auth/jwt-auth.guard'
 
 @Controller('order')
@@ -15,7 +15,7 @@ export class OrderController {
     }
 
     @UseGuards(JwtAuthGuard)
-    @ApiSecurity('access-key')
+    @ApiBearerAuth()
     @Get()
     findAll() {
         return this.orderService.findAll()
@@ -27,14 +27,14 @@ export class OrderController {
     }
 
     @UseGuards(JwtAuthGuard)
-    @ApiSecurity('access-key')
+    @ApiBearerAuth()
     @Patch(':uuid')
     update(@Param('uuid') uuid: string, @Body() updateOrderDto: OrderDto) {
         return this.orderService.update(uuid, updateOrderDto)
     }
 
     @UseGuards(JwtAuthGuard)
-    @ApiSecurity('access-key')
+    @ApiBearerAuth()
     @Delete(':uuid')
     remove(@Param('uuid') uuid: string) {
         return this.orderService.remove(uuid)
