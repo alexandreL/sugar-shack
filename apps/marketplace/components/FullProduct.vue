@@ -30,7 +30,9 @@ const loadProduct = async () => {
       <span class="loading loading-infinity loading-lg text-primary" />
     </div>
     <div v-else :key="productId" class="">
-      <figure><img class="w-full h-48 object-cover" :src="product.image" alt="product_image"></figure>
+      <figure class="flex justify-center items-center">
+        <img class=" object-cover image-full" :src="product.image" alt="product_image">
+      </figure>
 
       <div class="card-body">
         <span class="badge" :class="syrupColor(product.syrupType) + ' ' + syrupTextColor(product.syrupType)">
