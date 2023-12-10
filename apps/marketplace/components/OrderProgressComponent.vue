@@ -23,16 +23,18 @@ const stepClass = (step: { status: OrderStatus }) => {
 </script>
 
 <template>
-  <ul class="steps">
-    <li
-      v-for="(step, i) in steps"
-      :key="i"
-      :class="stepClass(step)"
-    >
-      {{ step.title }}
-    </li>
-  </ul>
-  <div v-if="orderStatus === OrderStatus.cancelled" class="mt-4 text-error">
-    The order has been cancelled.
+  <div>
+    <ul class="steps">
+      <li
+        v-for="(step, i) in steps"
+        :key="i"
+        :class="stepClass(step)"
+      >
+        {{ step.title }}
+      </li>
+    </ul>
+    <div v-if="orderStatus === OrderStatus.cancelled" class="mt-4 text-error">
+      The order has been cancelled.
+    </div>
   </div>
 </template>

@@ -17,6 +17,7 @@ import { ProductModule } from './product/product.module'
             database: 'db.sqlite',
             namingStrategy: new SnakeNamingStrategy(),
             entities: entities,
+            logging: [ 'query', 'error' ]
         }),
         // TypeOrmModule.forRoot({
         //     type: 'postgres',

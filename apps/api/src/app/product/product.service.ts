@@ -11,7 +11,8 @@ export class ProductService {
     }
 
     create(createProductDto: EditProductDto) {
-        return this.productRepository.save(createProductDto)
+        const product = this.productRepository.create(createProductDto)
+        return this.productRepository.save(product)
     }
 
     findAll() {
@@ -23,7 +24,8 @@ export class ProductService {
     }
 
     update(id: number, updateProductDto: EditProductDto) {
-        return this.productRepository.update(id, updateProductDto)
+        const product = this.productRepository.create(updateProductDto)
+        return this.productRepository.update(id, product)
     }
 
     remove(id: number) {

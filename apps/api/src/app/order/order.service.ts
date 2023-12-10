@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common'
-import { OrderDto } from '@sugar-shack/shared'
-import { Order } from '@sugar-shack/entity'
+import { OrderDto, OrderStatus } from '@sugar-shack/shared'
+import { Order, OrderLine } from '@sugar-shack/entity'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 import { ProductService } from '../product/product.service'
@@ -53,7 +53,8 @@ export class OrderService {
                 throw new Error(`not enough stock for product ${ orderLine.productId }`)
             }
         }
-        return this.orderRepository.save(createOrderDto)
+        createOrderDto.orderStatus = OrderStatus.pending
+        return this.orderRepository.save(this.orderRepository.create(createOrderDto))
     }
 
     findAll() {
@@ -65,7 +66,7 @@ export class OrderService {
     }
 
     update(uuid: string, updateOrderDto: OrderDto) {
-        return this.orderRepository.update(uuid, updateOrderDto)
+        return this.orderRepository.update(uuid, this.orderRepository.create(updateOrderDto))
     }
 
     remove(uuid: string) {

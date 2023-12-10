@@ -1,46 +1,29 @@
 <script setup lang="ts">
-import { OrderDto, OrderStatus, SyrupType } from '@sugar-shack/shared'
+import { OrderDto } from '@sugar-shack/shared'
+import { useOrderStore } from '../store'
+import { OrderClient } from '../utils/client'
 import CartLine from './CartLine.vue'
 
-const order: OrderDto = {
-    uuid: '123456789',
-    customerName: 'John Doe',
-    customerEmail: 'johndoe@example.com',
-    orderStatus: OrderStatus.creating,
-    totalPrice: 50,
-    orderLines: [
-        {
-            id: 1,
-            productName: 'Product 1',
-            productImage: 'https://example.com/product1.jpg',
-            productPrice: 20,
-            quantity: 2,
-            syrupType: SyrupType.AMBER
-        },
-        {
-            id: 2,
-            productName: 'Product 2',
-            productImage: 'https://example.com/product2.jpg',
-            productPrice: 10,
-            quantity: 3,
-            syrupType: SyrupType.DARK
-        },
-        {
-            id: 3,
-            productName: 'Product 3',
-            productImage: 'https://example.com/product3.jpg',
-            productPrice: 5,
-            quantity: 1,
-            syrupType: SyrupType.CLEAR
-        }
-    ]
-}
+const store = useOrderStore()
 const customerName = ref('')
 const customerEmail = ref('')
+const router = useRouter()
 
-const totalQuantity = () => order.orderLines?.reduce((total, product) => (total + product.quantity!), 0) ?? 0
-const placeOrder = () => {
-    console.log(`Placing the order for ${customerName.value} with email ${customerEmail.value} `)
+const placeOrder = async () => {
+    store.setOrder({
+        customerName: customerName.value,
+        customerEmail: customerEmail.value,
+        orderLines: store.orderLines
+    })
+    customerName.value = ''
+    customerEmail.value = ''
+    const order = store.order as OrderDto
+    order.totalPrice = store.totalPrice
+    const result = await OrderClient.createOrder(order)
+    if (result) {
+        store.resetOrder()
+        router.push(`/order/${result.uuid}`)
+    }
 }
 
 </script>
@@ -54,11 +37,21 @@ const placeOrder = () => {
       <form class="form-control" @submit.prevent="placeOrder">
         <div class="mb-4">
           <label for="customerName" class="label">Name</label>
-          <input id="customerName" v-model="customerName" type="text" class="input input-bordered w-full max-w-xs input-primary">
+          <input
+            id="customerName"
+            v-model="customerName"
+            type="text"
+            class="input input-bordered w-full max-w-xs input-primary"
+          >
         </div>
         <div class="mb-4">
           <label for="customerEmail" class="label">Email</label>
-          <input id="customerEmail" v-model="customerEmail" type="email" class="input input-bordered w-full max-w-xs input-primary">
+          <input
+            id="customerEmail"
+            v-model="customerEmail"
+            type="email"
+            class="input input-bordered w-full max-w-xs input-primary"
+          >
         </div>
         <button
           :disabled="!customerName || !customerEmail"
@@ -78,7 +71,7 @@ const placeOrder = () => {
         <div class="-mt-4 -ml-4 relative">
           <ul class="mt-3 grid grid-cols-1 gap-5 sm:gap-6">
             <CartLine
-              v-for="(orderLine, i) in order.orderLines"
+              v-for="(orderLine, i) in store.orderLines"
               :key="i"
               :orderLine="orderLine"
               :allowDelete="true"
@@ -86,9 +79,9 @@ const placeOrder = () => {
           </ul>
         </div>
         <div>
-          Total quantity: {{ totalQuantity() }}
+          Total quantity: {{ store.totalQuantity }}
           <br>
-          Total price: ${{ order.totalPrice }}
+          Total price: ${{ store.totalPrice }}
         </div>
       </div>
     </div>

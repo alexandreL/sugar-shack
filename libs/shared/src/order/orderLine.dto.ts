@@ -1,8 +1,9 @@
-import { IsEnum, IsInt, IsString } from 'class-validator'
+import { IsEnum, IsInt, IsNumber, IsOptional, IsString } from 'class-validator'
 import { SyrupType } from '../enum/SyrupType'
 
 export class OrderLineDto {
     @IsInt()
+    @IsOptional()
     id?: number
 
     @IsInt()
@@ -12,14 +13,17 @@ export class OrderLineDto {
     productName?: string
 
     @IsString()
+    @IsOptional()
     productImage?: string
 
-    @IsInt()
+    @IsNumber()
+    @IsOptional()
     productPrice?: number
 
     @IsInt()
     quantity?: number
 
     @IsEnum(SyrupType)
+    @IsOptional()
     syrupType?: SyrupType
 }

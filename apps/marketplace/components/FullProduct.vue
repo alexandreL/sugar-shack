@@ -2,13 +2,14 @@
 
 import { FullProductDto } from '@sugar-shack/shared'
 import { syrupColor, syrupTextColor } from '../utils/syrupColor'
+import { useOrderStore } from '../store'
 
 const product = ref<FullProductDto>()
 const productId = useAttrs().productId as number
-console.log('productId: ', productId)
 const loading = ref<boolean>(true)
-const addToCart = (id: number) => {
-    console.log('Adding product with id: ', id)
+const addToCart = () => {
+    const store = useOrderStore()
+    store.addProduct(product.value!)
 }
 
 onMounted(async () => {
@@ -53,7 +54,7 @@ const loadProduct = async () => {
         <div class="card-actions justify-end">
           <button
             class="btn btn-primary"
-            @click="addToCart(product.id!)"
+            @click="addToCart()"
           >
             Add to cart
           </button>

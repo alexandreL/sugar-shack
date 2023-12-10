@@ -1,10 +1,13 @@
 <script setup lang="ts">
-import { OrderLineDto, SyrupType } from '@sugar-shack/shared'
+import { OrderLineDto } from '@sugar-shack/shared'
+import { useOrderStore } from '../store'
 
 const orderLine: OrderLineDto = useAttrs().orderLine as OrderLineDto
+const key = useAttrs().key as number
 const allowDelete = useAttrs().allowDelete as boolean
-const removeItem = (id: number) => {
-    console.log('Removing product with id: ', id)
+const removeItem = (key: number) => {
+    const store = useOrderStore()
+    store.removeOrderLine(key)
 }
 </script>
 
@@ -29,10 +32,15 @@ const removeItem = (id: number) => {
         v-if="allowDelete"
         class="px-2 py-1 border rounded-md text-red-500 border-red-500 hover:bg-red-500 hover:text-white"
         title="Remove product"
-        @click="removeItem(orderLine.id!)"
+        @click="removeItem(key)"
       >
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-5 w-5">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m5-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m5-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+          />
         </svg>
       </button>
     </div>

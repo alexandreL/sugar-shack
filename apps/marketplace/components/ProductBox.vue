@@ -2,10 +2,12 @@
 import { ref } from 'vue'
 import { SmallProductDto } from '@sugar-shack/shared'
 import { syrupColor, syrupTextColor } from '../utils/syrupColor'
+import { useOrderStore } from '../store'
 
 const product: SmallProductDto = useAttrs().product as SmallProductDto
-const addToCart = (id: number) => {
-    console.log('Adding product with id: ', id)
+const addToCart = () => {
+    const store = useOrderStore()
+    store.addProduct(product)
 }
 const isLoaded = ref<boolean>(false)
 const showModal = () => {
@@ -16,14 +18,14 @@ const showModal = () => {
 </script>
 <template>
   <div>
-    <div :key="product.id" class="card bg-base-100 shadow-xl hover:cursor-pointer" @click="showModal">
+    <div :key="product.id" class="card bg-base-100 shadow-xl ">
       <figure><img class="w-full h-48 object-cover" :src="product.image" alt="product_image"></figure>
 
       <div class="card-body">
         <span class="badge" :class="syrupColor(product.syrupType) + ' ' + syrupTextColor(product.syrupType)">
           {{ product.syrupType }}
         </span>
-        <h2 class="text-gray-900 title-font text-lg font-medium card-title">
+        <h2 class="text-gray-900 title-font text-lg font-medium card-title hover:cursor-pointer" @click="showModal">
           {{ product.name }}
         </h2>
         <p class="mt-1">
@@ -32,7 +34,7 @@ const showModal = () => {
         <div class="card-actions justify-end">
           <button
             class="btn btn-primary"
-            @click="addToCart(product.id!)"
+            @click="addToCart()"
           >
             Add to cart
           </button>
@@ -46,7 +48,7 @@ const showModal = () => {
             ✕
           </button>
         </form>
-        <FullProduct v-if="isLoaded" :id="product.id" :productId="product.id" />
+        <FullProduct v-if="isLoaded" :id="product.id" :key="product.id" :productId="product.id" />
       </div>
       <form method="dialog" class="modal-backdrop" />
     </dialog>

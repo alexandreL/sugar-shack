@@ -2,6 +2,7 @@
 import { onMounted, ref } from 'vue'
 import { SmallProductDto, SyrupType } from '@sugar-shack/shared'
 import { syrupColor, syrupTextColor } from '../utils/syrupColor'
+import { useOrderStore } from '../store'
 import ProductBox from './ProductBox.vue'
 
 const products = ref<Array<SmallProductDto>>([])
@@ -11,7 +12,7 @@ const loading = ref<boolean>(true)
 
 const page = ref<number>(1)
 const perPage = 3 * 4 // 3 lines of 4 products
-
+const store = useOrderStore()
 onMounted(async () => {
     await loadProducts()
 })
@@ -61,7 +62,7 @@ const changePage = async (newPage: number) => {
         <div>
           <NuxtLink to="/shoppingCart" class="btn btn-primary mr-2">
             <img src="/basket.png" alt="basket" class="w-6 h-6 mr-2">
-            Shopping Cart
+            Shopping Cart {{ store.totalQuantity }}
           </NuxtLink>
         </div>
       </div>

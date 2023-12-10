@@ -37,12 +37,13 @@ class _OrderClient {
         return data || null
     }
 
-    async createOrder(order: OrderDto): Promise<void> {
-        await $fetch<void>('/api/order', {
+    async createOrder(order: OrderDto): Promise<OrderDto | null> {
+        const data = await $fetch<OrderDto>('/api/order', {
             method: 'POST',
             baseURL: this.baseURL,
             body: order,
         })
+        return data || null
     }
 
 }
