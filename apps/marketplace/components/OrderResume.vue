@@ -40,20 +40,20 @@ onMounted(async () => {
       <span class="loading loading-infinity loading-lg text-primary" />
     </div>
     <div v-else-if="failed || !order" class="flex justify-center items-center h-96">
-      <span class="text-red-500">Order not found</span>
+      <span class="text-red-500">Ordre non trouvé</span>
     </div>
     <div v-else>
       <div class="mb-6">
         <h2 class="text-lg font-medium text-gray-900">
-          Customer Information
+          Vos coordonnées
         </h2>
-        <div>Name: {{ order.customerName }}</div>
+        <div>Nom: {{ order.customerName }}</div>
         <div>Email: {{ order.customerEmail }}</div>
       </div>
 
       <div class="mb-6">
         <h2 class="text-lg font-medium text-gray-900">
-          Products
+          Produits
         </h2>
         <div class="divide-y divide-gray-200">
           <CartLine
@@ -67,14 +67,14 @@ onMounted(async () => {
 
       <div class="mb-6">
         <h2 class="text-lg font-medium text-gray-900">
-          Total Price
+          Prix total
         </h2>
         <div>${{ order.totalPrice }}</div>
       </div>
 
       <div>
         <h2 class="text-lg font-medium text-gray-900">
-          Order Status
+          Statut de la commande
         </h2>
         <OrderProgressComponent :orderStatus="status" />
       </div>

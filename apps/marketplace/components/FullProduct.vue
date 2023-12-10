@@ -47,7 +47,7 @@ const loadProduct = async () => {
           {{ product.stock }}
         </p>
         <p class="mt-1">
-          Price:
+          prix:
           ${{ product.price }}
         </p>
 
@@ -56,7 +56,7 @@ const loadProduct = async () => {
             class="btn btn-primary"
             @click="addToCart()"
           >
-            Add to cart
+            Ajouter au panier
           </button>
         </div>
       </div>

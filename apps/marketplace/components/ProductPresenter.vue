@@ -41,7 +41,7 @@ const changePage = async (newPage: number) => {
   <div class="container mx-auto py-10 px-6 md:px-12">
     <div class="flex items-center justify-between">
       <h2 class="text-2xl font-semibold tracking-tight">
-        Our Products
+        Nos produits
       </h2>
       <div class="flex">
         <div class="flex items-center">
@@ -52,7 +52,7 @@ const changePage = async (newPage: number) => {
             @change="loadProducts"
           >
             <option selected value="">
-              All Syrup Types
+              Tous les couleurs de sirop
             </option>
             <option v-for="type in Object.values(SyrupType)" :key="type" :value="type">
               {{ type }}
@@ -62,7 +62,7 @@ const changePage = async (newPage: number) => {
         <div>
           <NuxtLink to="/shoppingCart" class="btn btn-primary mr-2">
             <img src="/basket.png" alt="basket" class="w-6 h-6 mr-2">
-            Shopping Cart {{ store.totalQuantity }}
+            Panier {{ store.totalQuantity }}
           </NuxtLink>
         </div>
       </div>

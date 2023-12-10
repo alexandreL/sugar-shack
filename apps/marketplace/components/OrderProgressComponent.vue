@@ -34,7 +34,7 @@ const stepClass = (step: { status: OrderStatus }) => {
       </li>
     </ul>
     <div v-if="orderStatus === OrderStatus.cancelled" class="mt-4 text-error">
-      The order has been cancelled.
+      La commande a été annulée.
     </div>
   </div>
 </template>

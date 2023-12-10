@@ -32,11 +32,11 @@ const placeOrder = async () => {
     <!-- Customer Details Form -->
     <div class="w-1/2 h-64">
       <h2 class="text-lg font-medium text-gray-900 mb-4">
-        Your personal details
+        Vos coordonnées
       </h2>
       <form class="form-control" @submit.prevent="placeOrder">
         <div class="mb-4">
-          <label for="customerName" class="label">Name</label>
+          <label for="customerName" class="label">Nom</label>
           <input
             id="customerName"
             v-model="customerName"
@@ -58,7 +58,7 @@ const placeOrder = async () => {
           type="submit"
           class="btn btn-accent max-w-xs"
         >
-          Place Order
+          Passer la commande
         </button>
       </form>
     </div>
@@ -66,7 +66,7 @@ const placeOrder = async () => {
     <div class="w-1/2 bg-white shadow overflow-hidden sm:rounded-lg">
       <div class="px-4 py-5 sm:p-6">
         <h3 class="text-lg font-medium text-gray-900">
-          Order details
+          Détails de la commande
         </h3>
         <div class="-mt-4 -ml-4 relative">
           <ul class="mt-3 grid grid-cols-1 gap-5 sm:gap-6">
@@ -79,9 +79,9 @@ const placeOrder = async () => {
           </ul>
         </div>
         <div>
-          Total quantity: {{ store.totalQuantity }}
+          Quantité totale du produit: {{ store.totalQuantity }}
           <br>
-          Total price: ${{ store.totalPrice }}
+          Prix total: ${{ store.totalPrice }}
         </div>
       </div>
     </div>

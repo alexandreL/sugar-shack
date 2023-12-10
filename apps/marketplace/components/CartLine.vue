@@ -22,7 +22,7 @@ const removeItem = (key: number) => {
           {{ orderLine.productName }}
         </div>
         <p class="text-sm text-gray-500 truncate">
-          Quantity: {{ orderLine.quantity }}
+          Quantité: {{ orderLine.quantity }}
         </p>
       </div>
       <div class="text-sm text-gray-500">

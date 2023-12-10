@@ -36,7 +36,7 @@ const showModal = () => {
             class="btn btn-primary"
             @click="addToCart()"
           >
-            Add to cart
+            Ajouter au panier
           </button>
         </div>
       </div>
