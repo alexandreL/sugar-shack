@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "clean:hard": "rm -rf dist node_modules apps/*/dist apps/*/node_modules apps/*/.output"
+    "clean:hard": "rm -rf dist node_modules apps/*/dist apps/*/node_modules apps/*/.output",
+    "pipeline:fake": "npx nx run-many --t=lint --all && nx run-many --t=build --all && nx run-many --t=test --all",
+    "pipeline:fake-no-cache": "npx nx run-many --t=lint --all --skip-nx-cache && nx run-many --t=build --all --skip-nx-cache && nx run-many --t=test --all --skip-nx-cache"
   },
   "private": true,
   "devDependencies": {

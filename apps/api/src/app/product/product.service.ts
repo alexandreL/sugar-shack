@@ -55,4 +55,11 @@ export class ProductService {
             },
         })
     }
+
+    async refillStock(id: number) {
+        const product = await this.productRepository.findOne({ where: { id } })
+        if (!product) throw new Error('product not found')
+        product.stock = product.maxStock
+        return this.productRepository.save(product)
+    }
 }

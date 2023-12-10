@@ -4,6 +4,11 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [],
+  daisyui: {
+    themes: [
+      'aqua',
+    ],
+  },
+  plugins: [ require('daisyui') ],
 }
 

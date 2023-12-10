@@ -4,7 +4,7 @@ import { OrderService } from './order.service'
 import { ModuleMocker } from 'jest-mock'
 import { ProductService } from '../product/product.service'
 import { getRepositoryToken } from '@nestjs/typeorm'
-import { Order } from '@sugar-shack/entity'
+import { Order, OrderLine } from '@sugar-shack/entity'
 
 const moduleMocker = new ModuleMocker(global)
 
@@ -55,6 +55,17 @@ describe('OrderService', () => {
                         findOne: jest.fn().mockResolvedValue({}),
                         save: jest.fn().mockImplementation((order) => order),
                         delete: jest.fn().mockResolvedValue({}),
+                        create: jest.fn().mockImplementation((order) => order),
+                    },
+                },
+                {
+                    provide: getRepositoryToken(OrderLine),
+                    useValue: {
+                        find: jest.fn().mockResolvedValue([]),
+                        findOne: jest.fn().mockResolvedValue({}),
+                        save: jest.fn().mockImplementation((order) => order),
+                        delete: jest.fn().mockResolvedValue({}),
+                        create: jest.fn().mockImplementation((order) => order),
                     },
                 },
                 {

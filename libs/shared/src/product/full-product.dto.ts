@@ -21,6 +21,9 @@ export class FullProductDto {
     @IsInt()
     stock?: number
 
+    @IsInt()
+    maxStock?: number
+
     @IsEnum(SyrupType)
     syrupType?: SyrupType
 }

@@ -10,12 +10,13 @@ class _ProductClient {
             method: 'GET',
             baseURL: this.baseURL,
             params: {},
+            headers: { 'Authorization': `Bearer ${ this.getAuthToken() }` },
         })
         return data || []
     }
 
-    async getProductById(id: string): Promise<SmallProductDto | null> {
-        const data = await $fetch<SmallProductDto>(`/api/product/${ id }`, {
+    async getProductById(id: string): Promise<FullProductDto | null> {
+        const data = await $fetch<FullProductDto>(`/api/product/${ id }`, {
             method: 'GET',
             baseURL: this.baseURL,
         })
@@ -27,6 +28,7 @@ class _ProductClient {
             method: 'POST',
             baseURL: this.baseURL,
             body: product,
+            headers: { 'Authorization': `Bearer ${ this.getAuthToken() }` },
         })
     }
 
@@ -35,6 +37,15 @@ class _ProductClient {
             method: 'PATCH',
             baseURL: this.baseURL,
             body: product,
+            headers: { 'Authorization': `Bearer ${ this.getAuthToken() }` },
+        })
+    }
+
+    async refillStock(id: string): Promise<void> {
+        await $fetch<void>(`/api/product/${ id }/refill`, {
+            method: 'PATCH',
+            baseURL: this.baseURL,
+            headers: { 'Authorization': `Bearer ${ this.getAuthToken() }` },
         })
     }
 
@@ -42,7 +53,13 @@ class _ProductClient {
         await $fetch<void>(`/api/product/${ id }`, {
             method: 'DELETE',
             baseURL: this.baseURL,
+            headers: { 'Authorization': `Bearer ${ this.getAuthToken() }` },
         })
+    }
+
+    private getAuthToken(): string | undefined {
+        const token = useCookie('token')
+        return token.value || undefined
     }
 }
 
@@ -55,6 +72,7 @@ class _OrderClient {
         const data = await $fetch<Array<OrderDto>>('/api/order', {
             method: 'GET',
             baseURL: this.baseURL,
+            headers: { 'Authorization': `Bearer ${ this.getAuthToken() }` },
         })
         return data || []
     }
@@ -80,6 +98,7 @@ class _OrderClient {
             method: 'PATCH',
             baseURL: this.baseURL,
             body: order,
+            headers: { 'Authorization': `Bearer ${ this.getAuthToken() }` },
         })
     }
 
@@ -87,7 +106,13 @@ class _OrderClient {
         await $fetch<void>(`/api/order/${ uuid }`, {
             method: 'DELETE',
             baseURL: this.baseURL,
+            headers: { 'Authorization': `Bearer ${ this.getAuthToken() }` },
         })
+    }
+
+    private getAuthToken(): string | undefined {
+        const token = useCookie('token')
+        return token.value || undefined
     }
 }
 

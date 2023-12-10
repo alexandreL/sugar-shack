@@ -34,13 +34,18 @@ export default defineNuxtConfig({
      * https://nuxt.com/docs/guide/directory-structure/tsconfig
      **/
     alias: getMonorepoTsConfigPaths('../../tsconfig.base.json'),
+    vite: {
+        esbuild: {
+            tsconfigRaw: {
+                compilerOptions: {
+                    experimentalDecorators: true
+                }
+            }
+        }
+    },
     devtools: { enabled: true },
     modules: [
+        '@pinia/nuxt',
         '@nuxtjs/tailwindcss',
-        [ '@nuxtjs/eslint-module', {
-            fix: true,
-            'extends': [ '../../.eslintrc.json' ],
-        } ],
     ],
-
 })

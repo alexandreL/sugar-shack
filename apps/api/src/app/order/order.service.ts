@@ -10,6 +10,7 @@ import { ProductService } from '../product/product.service'
 export class OrderService {
     constructor(
         @InjectRepository(Order) private orderRepository: Repository<Order>,
+        @InjectRepository(OrderLine) private orderLineRepository: Repository<OrderLine>,
         private productService: ProductService,
     ) {
     }
@@ -66,10 +67,11 @@ export class OrderService {
     }
 
     update(uuid: string, updateOrderDto: OrderDto) {
-        return this.orderRepository.update(uuid, this.orderRepository.create(updateOrderDto))
+        return this.orderRepository.save(this.orderRepository.create({ ...updateOrderDto, uuid }))
     }
 
-    remove(uuid: string) {
+    async remove(uuid: string) {
+        await this.orderLineRepository.delete({ order: { uuid } })
         return this.orderRepository.delete(uuid)
     }
 }

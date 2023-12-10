@@ -62,7 +62,10 @@ const changePage = async (newPage: number) => {
         <div>
           <NuxtLink to="/shoppingCart" class="btn btn-primary mr-2">
             <img src="/basket.png" alt="basket" class="w-6 h-6 mr-2">
-            Panier {{ store.totalQuantity }}
+            Panier
+            <div class="badge badge-secondary">
+              {{ store.totalQuantity }}
+            </div>
           </NuxtLink>
         </div>
       </div>

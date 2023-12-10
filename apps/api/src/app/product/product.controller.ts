@@ -16,6 +16,8 @@ export class ProductController {
         return this.productService.create(createProductDto)
     }
 
+    @UseGuards(JwtAuthGuard)
+    @ApiBearerAuth()
     @Get()
     findAll() {
         return this.productService.findAll()
@@ -39,6 +41,13 @@ export class ProductController {
         @Body() updateProductDto: EditProductDto,
     ) {
         return this.productService.update(+id, updateProductDto)
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @ApiBearerAuth()
+    @Patch(':id/refill')
+    refillStock(@Param('id') id: string) {
+        return this.productService.refillStock(+id)
     }
 
     @UseGuards(JwtAuthGuard)
