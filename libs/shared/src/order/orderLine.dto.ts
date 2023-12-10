@@ -5,6 +5,9 @@ export class OrderLineDto {
     @IsInt()
     id?: number
 
+    @IsInt()
+    productId?: number
+
     @IsString()
     productName?: string
 

@@ -5,6 +5,7 @@ import { syrupColor, syrupTextColor } from '../utils/syrupColor'
 
 const product = ref<FullProductDto>()
 const productId = useAttrs().productId as number
+console.log('productId: ', productId)
 const loading = ref<boolean>(true)
 const addToCart = (id: number) => {
     console.log('Adding product with id: ', id)
@@ -41,9 +42,11 @@ const loadProduct = async () => {
           {{ product.description }}
         </p>
         <p class="mt-1">
+          Stock:
           {{ product.stock }}
         </p>
         <p class="mt-1">
+          Price:
           ${{ product.price }}
         </p>
 

@@ -17,6 +17,6 @@ export class Order {
     @Column({ type: 'varchar', default: OrderStatus.creating })
     orderStatus?: OrderStatus
 
-    @OneToMany(() => OrderLine, (orderLine) => orderLine.order)
+    @OneToMany(() => OrderLine, (orderLine) => orderLine.order, { eager: true })
     orderLines?: OrderLine[]
 }

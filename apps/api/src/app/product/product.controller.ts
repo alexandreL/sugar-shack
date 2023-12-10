@@ -1,6 +1,6 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common'
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query, UseGuards } from '@nestjs/common'
 import { ProductService } from './product.service'
-import { EditProductDto } from '@sugar-shack/shared'
+import { EditProductDto, FilterProductDto } from '@sugar-shack/shared'
 import { ApiBearerAuth } from '@nestjs/swagger'
 import { JwtAuthGuard } from '../auth/jwt-auth.guard'
 
@@ -19,6 +19,11 @@ export class ProductController {
     @Get()
     findAll() {
         return this.productService.findAll()
+    }
+
+    @Get('filtered')
+    foundWithFilter(@Query() filter: FilterProductDto) {
+        return this.productService.findAllWithFilter(filter)
     }
 
     @Get(':id')

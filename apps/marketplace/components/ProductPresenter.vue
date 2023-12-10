@@ -2,7 +2,7 @@
 import { onMounted, ref } from 'vue'
 import { SmallProductDto, SyrupType } from '@sugar-shack/shared'
 import { syrupColor, syrupTextColor } from '../utils/syrupColor'
-import ProductBox from '~/components/ProductBox.vue'
+import ProductBox from './ProductBox.vue'
 
 const products = ref<Array<SmallProductDto>>([])
 const syrupTypeFilter = ref<SyrupType | ''>('')
@@ -18,17 +18,20 @@ onMounted(async () => {
 
 const loadProducts = async () => {
     const timeoutId = setTimeout(() => (loading.value = true), 200)
-    // @ts-ignore
-    if (!syrupTypeFilter.value || syrupTypeFilter.value === '') {
-        products.value = await ProductClient.getAllProducts()
-    } else {
-        products.value = await ProductClient.getProductByFilter({ syrupType: syrupTypeFilter.value })
-    }
+    const syrupType = syrupTypeFilter.value === '' ? undefined : syrupTypeFilter.value
+    products.value = await ProductClient.getProductByFilter({ syrupType, take: perPage.toString(), skip: ((page.value - 1) * perPage).toString() })
+
     clearTimeout(timeoutId)
     loading.value = false
 }
 
 const changePage = async (newPage: number) => {
+    if (newPage < 1) {
+        return
+    }
+    if (newPage > page.value && products.value.length < perPage) {
+        return
+    }
     page.value = newPage
     await loadProducts()
 }

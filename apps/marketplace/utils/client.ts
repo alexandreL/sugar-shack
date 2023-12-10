@@ -1,30 +1,21 @@
-import { FullProductDto, OrderDto, SmallProductDto } from '@sugar-shack/shared'
-import { FilterProductDto } from '@sugar-shack/shared'
+import { FilterProductDto, FullProductDto, OrderDto, SmallProductDto } from '@sugar-shack/shared'
 
 
 class _ProductClient {
     constructor(private readonly baseURL: string = 'http://localhost:4000') {
     }
 
-    async getAllProducts(): Promise<Array<SmallProductDto>> {
-        const data = await $fetch<Array<FullProductDto>>('/api/product', {
-            method: 'GET',
-            baseURL: this.baseURL,
-            params: {},
-        })
-        return data || []
-    }
-
     async getProductByFilter(filter: FilterProductDto): Promise<Array<SmallProductDto>> {
-        const data = await $fetch<Array<FullProductDto>>('/api/product', {
+        const data = await $fetch<Array<FullProductDto>>('/api/product/filtered', {
             method: 'GET',
             baseURL: this.baseURL,
-            params: { filter },
+            params: filter,
         })
         return data || []
     }
 
     async getProductById(id: number): Promise<SmallProductDto | null> {
+        if (!id) return null
         const data = await $fetch<SmallProductDto>(`/api/product/${ id }`, {
             method: 'GET',
             baseURL: this.baseURL,

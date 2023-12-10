@@ -1,5 +1,5 @@
 <script setup lang="ts">
-
+import { ref } from 'vue'
 import { SmallProductDto } from '@sugar-shack/shared'
 import { syrupColor, syrupTextColor } from '../utils/syrupColor'
 
@@ -7,7 +7,9 @@ const product: SmallProductDto = useAttrs().product as SmallProductDto
 const addToCart = (id: number) => {
     console.log('Adding product with id: ', id)
 }
+const isLoaded = ref<boolean>(false)
 const showModal = () => {
+    isLoaded.value = true
     const modal = document.getElementById('my_modal_2') as HTMLDialogElement
     modal.showModal()
 }
@@ -44,7 +46,7 @@ const showModal = () => {
             ✕
           </button>
         </form>
-        <FullProduct :product-id="product.id" />
+        <FullProduct v-if="isLoaded" :id="product.id" :productId="product.id" />
       </div>
       <form method="dialog" class="modal-backdrop" />
     </dialog>
