@@ -1,22 +1,49 @@
 {
-  "extends": ["../../.eslintrc.json"],
-  "ignorePatterns": [".nuxt/**/*", "dist/**/*", "node_modules/**/*", ".output/**/*"],
-  "parser": "vue-eslint-parser",
+    "extends": [
+        "../../.eslintrc.json"
+    ],
+    "ignorePatterns": [
+        ".nuxt/**/*",
+        "dist/**/*",
+        "node_modules/**/*",
+        ".output/**/*"
+    ],
+    "parser": "vue-eslint-parser",
     "parserOptions": {
         "parser": "@typescript-eslint/parser"
     },
-  "overrides": [
-    {
-      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
-      "rules": {}
-    },
-    {
-      "files": ["*.vue"],
-      "extends": ["../../.eslintrc.json", "@nuxtjs/eslint-config-typescript"],
-      "excludedFiles": [".nuxt/**/*", "dist/**/*", "node_modules/**/*", ".output/**/*"],
-      "rules": {
-          "indent": ["error", 4]
-      }
-    }
-  ]
+    "overrides": [
+        {
+            "files": [
+                "*.ts",
+                "*.tsx",
+                "*.js",
+                "*.jsx"
+            ],
+            "rules": {}
+        },
+        {
+            "files": [
+                "*.vue"
+            ],
+            "extends": [
+                "../../.eslintrc.json",
+                "@nuxtjs/eslint-config-typescript"
+            ],
+            "excludedFiles": [
+                ".nuxt/**/*",
+                "dist/**/*",
+                "node_modules/**/*",
+                ".output/**/*"
+            ],
+            "rules": {
+                "indent": [
+                    "error",
+                    4
+                ],
+                "vue/multi-word-component-names": "off",
+                "vue/attribute-hyphenation": "off"
+            }
+        }
+    ]
 }

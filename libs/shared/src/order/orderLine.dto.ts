@@ -6,10 +6,10 @@ export class OrderLineDto {
     id?: number
 
     @IsString()
-    ProductName?: string
+    productName?: string
 
     @IsString()
-    ProductImage?: string
+    productImage?: string
 
     @IsInt()
     productPrice?: number

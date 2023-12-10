@@ -18,9 +18,9 @@ const showModal = () => {
       <figure><img class="w-full h-48 object-cover" :src="product.image" alt="product_image"></figure>
 
       <div class="card-body">
-      <span class="badge" :class="syrupColor(product.syrupType) + ' ' + syrupTextColor(product.syrupType)">
-        {{ product.syrupType }}
-      </span>
+        <span class="badge" :class="syrupColor(product.syrupType) + ' ' + syrupTextColor(product.syrupType)">
+          {{ product.syrupType }}
+        </span>
         <h2 class="text-gray-900 title-font text-lg font-medium card-title">
           {{ product.name }}
         </h2>
@@ -40,12 +40,13 @@ const showModal = () => {
     <dialog id="my_modal_2" class="modal modal-bottom sm:modal-middle">
       <div class="modal-box">
         <form method="dialog" class="">
-          <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+          <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+            ✕
+          </button>
         </form>
         <FullProduct :product-id="product.id" />
       </div>
-      <form method="dialog" class="modal-backdrop">
-      </form>
+      <form method="dialog" class="modal-backdrop" />
     </dialog>
   </div>
 </template>

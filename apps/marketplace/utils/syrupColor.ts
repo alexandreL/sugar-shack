@@ -1,6 +1,6 @@
 import { SyrupType } from '@sugar-shack/shared'
 
-export function syrupColor(syrupType?: SyrupType) {
+export function syrupColor(syrupType?: SyrupType | '' | null) {
     switch (syrupType) {
     case SyrupType.AMBER:
         return 'bg-yellow-500'
@@ -13,7 +13,7 @@ export function syrupColor(syrupType?: SyrupType) {
     }
 }
 
-export function syrupTextColor(syrupType?: SyrupType) {
+export function syrupTextColor(syrupType?: SyrupType | '' | null) {
     switch (syrupType) {
     case SyrupType.AMBER:
     case SyrupType.CLEAR:

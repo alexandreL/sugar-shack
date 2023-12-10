@@ -1,5 +1,5 @@
 import { FullProductDto, OrderDto, SmallProductDto } from '@sugar-shack/shared'
-import { FilterProductDto } from '../../../libs/shared/src/product/filter-product.dto'
+import { FilterProductDto } from '@sugar-shack/shared'
 
 
 class _ProductClient {
@@ -24,7 +24,7 @@ class _ProductClient {
         return data || []
     }
 
-    async getProductById(id: string): Promise<SmallProductDto | null> {
+    async getProductById(id: number): Promise<SmallProductDto | null> {
         const data = await $fetch<SmallProductDto>(`/api/product/${ id }`, {
             method: 'GET',
             baseURL: this.baseURL,

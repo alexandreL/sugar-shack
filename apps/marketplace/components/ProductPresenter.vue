@@ -5,7 +5,7 @@ import { syrupColor, syrupTextColor } from '../utils/syrupColor'
 import ProductBox from '~/components/ProductBox.vue'
 
 const products = ref<Array<SmallProductDto>>([])
-const syrupTypeFilter = ref<SyrupType | null>('')
+const syrupTypeFilter = ref<SyrupType | ''>('')
 
 const loading = ref<boolean>(true)
 
@@ -18,7 +18,8 @@ onMounted(async () => {
 
 const loadProducts = async () => {
     const timeoutId = setTimeout(() => (loading.value = true), 200)
-    if (syrupTypeFilter.value === null) {
+    // @ts-ignore
+    if (!syrupTypeFilter.value || syrupTypeFilter.value === '') {
         products.value = await ProductClient.getAllProducts()
     } else {
         products.value = await ProductClient.getProductByFilter({ syrupType: syrupTypeFilter.value })
@@ -38,19 +39,29 @@ const changePage = async (newPage: number) => {
       <h2 class="text-2xl font-semibold tracking-tight">
         Our Products
       </h2>
-      <select
-        v-model="syrupTypeFilter"
-        class="select select-bordered join-item"
-        :class="syrupColor(syrupTypeFilter) + ' ' + syrupTextColor(syrupTypeFilter)"
-        @change="loadProducts"
-      >
-        <option selected value="">
-          All
-        </option>
-        <option v-for="type in Object.values(SyrupType)" :key="type" :value="type">
-          {{ type }}
-        </option>
-      </select>
+      <div class="flex">
+        <div class="flex items-center">
+          <select
+            v-model="syrupTypeFilter"
+            class="select select-bordered join-item mr-2"
+            :class="syrupColor(syrupTypeFilter) + ' ' + syrupTextColor(syrupTypeFilter)"
+            @change="loadProducts"
+          >
+            <option selected value="">
+              All Syrup Types
+            </option>
+            <option v-for="type in Object.values(SyrupType)" :key="type" :value="type">
+              {{ type }}
+            </option>
+          </select>
+        </div>
+        <div>
+          <NuxtLink to="/shoppingCart" class="btn btn-primary mr-2">
+            <img src="/basket.png" alt="basket" class="w-6 h-6 mr-2">
+            Shopping Cart
+          </NuxtLink>
+        </div>
+      </div>
     </div>
 
     <div v-if="!loading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-8 mx-auto">
@@ -62,7 +73,7 @@ const changePage = async (newPage: number) => {
     </div>
 
     <div v-if="loading" class="flex justify-center items-center">
-      <span class="loading loading-infinity loading-lg text-primary"/>
+      <span class="loading loading-infinity loading-lg text-primary" />
     </div>
 
     <div class="flex justify-center items-center mt-4">

@@ -16,7 +16,7 @@ onMounted(async () => {
 
 const loadProduct = async () => {
     const timeoutId = setTimeout(() => (loading.value = true), 200)
-    product.value = await ProductClient.getProductById(productId)
+    product.value = await ProductClient.getProductById(productId) || undefined
     clearTimeout(timeoutId)
     loading.value = false
 }
@@ -25,7 +25,7 @@ const loadProduct = async () => {
 <template>
   <div>
     <div v-if="!product" class="flex justify-center items-center h-96">
-      <span class="loading loading-infinity loading-lg text-primary"/>
+      <span class="loading loading-infinity loading-lg text-primary" />
     </div>
     <div v-else :key="productId" class="">
       <figure><img class="w-full h-48 object-cover" :src="product.image" alt="product_image"></figure>
