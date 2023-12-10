@@ -1,8 +1,12 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import Footer from '../components/Footer.vue'
+import Header from '../components/Header.vue'
+</script>
 
 <template>
   <div>
-    Page: foo
+    <Header />
+    <Footer />
   </div>
 </template>
 
