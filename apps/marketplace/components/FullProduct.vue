@@ -23,7 +23,7 @@ const loadProduct = async () => {
     loading.value = false
 }
 const isInStock = () => {
-    return product.stock! > 0
+    return product.value && product.value.stock! > 0
 }
 </script>
 <template>

@@ -20,6 +20,11 @@ This workspace contains 3 apps:
 - Run the command `npm i`
 - Run the command `nx run-many -t serve`
 
+**Docker alternative**
+
+- Run the command `docker build . -t sugar-shack:nx-base` to initialize the base image
+- Run the command `docker-compose up`
+
 ### Understand this workspace
 
 Run the command `nx graph` to see a diagram of the dependencies of the projects.
@@ -33,6 +38,13 @@ Each project has its own `project.json` file, which contains the configuration a
   - Access the swagger at http://localhost:4000/api
 - bo: the back office. It runs on port 3001
 - marketplace: the marketplace. It runs on port 3000
+
+## Demo
+
+marketplace:
+![marketplace_demo.gif](.extra%2Fmarketplace_demo.gif)
+backoffice:
+![bo_demo.gif](.extra%2Fbo_demo.gif)
 
 ## Folder structure
 

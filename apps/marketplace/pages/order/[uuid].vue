@@ -9,7 +9,7 @@ const uuid = route.params.uuid
 </script>
 
 <template>
-  <div class="flex flex-col min-h-screen">
+  <div class="flex justify-center items-center flex-col min-h-screen">
     <Header />
     <main class="flex-1 max-w-6xl md:py-8 md:p-8 md:mt-16">
       <OrderResume :uuid="uuid" />

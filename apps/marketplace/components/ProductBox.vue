@@ -12,7 +12,7 @@ const addToCart = () => {
 const isLoaded = ref<boolean>(false)
 const showModal = () => {
     isLoaded.value = true
-    const modal = document.getElementById('my_modal_2') as HTMLDialogElement
+    const modal = document.getElementById('my_modal' + product.id) as HTMLDialogElement
     modal.showModal()
 }
 
@@ -52,7 +52,7 @@ const isInStock = () => {
         </div>
       </div>
     </div>
-    <dialog id="my_modal_2" class="modal modal-bottom sm:modal-middle">
+    <dialog :id="'my_modal'+ product.id" class="modal modal-bottom sm:modal-middle">
       <div class="modal-box">
         <form method="dialog" class="">
           <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">

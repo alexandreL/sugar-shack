@@ -1,0 +1,70 @@
+version: "3.8"
+
+networks:
+  corp:
+    driver: bridge
+
+services:
+  api:
+    container_name: api
+    build:
+      context: ./
+      cache_from:
+        - sugar-shack:nx-base
+      dockerfile: ./apps/api/Dockerfile
+      args:
+        NODE_ENV: "development"
+        BUILD_FLAG: ""
+    image: api:nx-dev
+    ports:
+      - 4000:4000
+    environment:
+      NODE_ENV: "development"
+      JWT_SECRET: ${JWT_SECRET}
+      API_PORT: ${API_PORT}
+      PORT: 4000
+    networks:
+      - corp
+    restart: on-failure
+
+  marketplace:
+    container_name: marketplace
+    build:
+      context: ./
+      cache_from:
+        - sugar-shack:nx-base
+      dockerfile: ./apps/marketplace/Dockerfile
+      args:
+        NODE_ENV: "development"
+        BUILD_FLAG: ""
+    image: marketplace:nx-dev
+    ports:
+      - 3000:3000
+    environment:
+      NODE_ENV: "development"
+      API_PORT: ${API_PORT}
+      PORT: 3000
+    networks:
+      - corp
+    restart: on-failure
+
+  bo:
+    container_name: bo
+    build:
+      context: ./
+      cache_from:
+        - sugar-shack:nx-base
+      dockerfile: ./apps/bo/Dockerfile
+      args:
+        NODE_ENV: "development"
+        BUILD_FLAG: ""
+    image: bo:nx-dev
+    ports:
+      - 3001:3001
+    environment:
+      NODE_ENV: "development"
+      API_PORT: ${API_PORT}
+      PORT: 3001
+    networks:
+      - corp
+    restart: on-failure
