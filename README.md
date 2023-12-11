@@ -1,38 +1,47 @@
 # SugarShack
 
+# Apps
+
+This workspace contains 3 apps:
+
+- API: This API is used for all of the apps. It allows users to log in to the back office, access and modify the list of products, and place orders for products.
+- BO: This is the back office used for managing the list of products, stock, and orders.
+- Marketplace: This is the marketplace where you can order delicious maple syrup products.
+
 ## Getting started
 
 ### Prerequisites
 
-- Node.js > 18
-- nx in global is better: `npm i -g nx` (if you don't want to install it globally, you can use `npx nx` instead of `nx`)
+- Node.js version should be greater than 18
+- It is recommended to have nx installed globally: `npm i -g nx` (if you don't want to install it globally, you can use `npx nx` instead of `nx`)
 
 ### Steps to run this project:
 
-- Run `npm i` command
-- Run `nx run-many -t serve` command
+- Run the command `npm i`
+- Run the command `nx run-many -t serve`
 
 ### Understand this workspace
 
-Run `nx graph` to see a diagram of the dependencies of the projects.
-All the configuration is in `nx.json` file.
-All the projects are in `apps` and `libs` folders.
-Each project has its own `project.json` file, witch contains the configuration and executor for itself.
+Run the command `nx graph` to see a diagram of the dependencies of the projects.
+All the configuration is in the `nx.json` file.
+All the projects are located in the `apps` and `libs` folders.
+Each project has its own `project.json` file, which contains the configuration and executor for itself.
 
 # Apps
 
-- api: the api. Run on port 4000
-- bo: the back office. Run on port 3001
-- marketplace: the marketplace. Run on port 3000
+- api: the api. It runs on port 4000
+  - Access the swagger at http://localhost:4000/api
+- bo: the back office. It runs on port 3001
+- marketplace: the marketplace. It runs on port 3000
 
 ## Folder structure
 
-- apps: all the apps
+- apps: contains all the apps
   - [api](apps%2Fapi): the api
   - [bo](apps%2Fbo): the back office
   - [marketplace](apps%2Fmarketplace): the marketplace
   - [database-migrations](apps%2Fdatabase-migrations): the database migrations
-- libs: all the libs
+- libs: contains all the libs
   - [entity](libs%2Fentity): the database entities
   - [shared](libs%2Fshared): the shared code between apps
   - [ui](libs%2Fui): the shared ui components
@@ -53,26 +62,28 @@ TypeORM is an ORM that can run in NodeJS. Nest provides tight integration with T
 
 #### SQLite
 
-SQLite for development reasons. In production, we will use PostgreSQL.
+SQLite is used for development purposes. In production, we will use PostgreSQL.
 
 #### NuxtJS
 
-NuxtJS is a framework for creating Vue.js applications. Its goal is to help Vue developers take advantage of top-notch technologies and features in a fast, easy and organized way.
+NuxtJS is a framework for creating Vue.js applications. Its goal is to help Vue developers take advantage of top-notch technologies and features in a fast, easy, and organized way.
+
+## Commands helpers
 
 ### Run apps
 
-Run `nx run <project-name>:serve` to serve the project.
-Run `nx run-many -t serve --projects=api,marketplace` to serve multiple project.
+Run the command `nx run <project-name>:serve` to serve the project.
+Run the command `nx run-many -t serve --projects=api,marketplace` to serve multiple projects.
 
 ### Run tests
 
-Run `nx run-many -t test` to execute all the tests.
-Run `nx run <project-name>:test` to execute the test of a specific project.
+Run the command `nx run-many -t test` to execute all the tests.
+Run the command `nx run <project-name>:test` to execute the tests of a specific project.
 
 ### Build the apps
 
-Run `nx build <project-name>` to build the project.
-Run `nx run-many --target=build --projects=api,bo` to build multiple project.
+Run the command `nx build <project-name>` to build the project.
+Run the command `nx run-many --target=build --projects=api,bo` to build multiple projects.
 
 ### Further help
 
@@ -82,9 +93,9 @@ Visit the [Nx Documentation](https://nx.dev) to learn more.
 
 ## Local Database
 
-database is a sqlite database for development reasons
+The database used for development purposes is SQLite.
 
-## login for back office
+## Login for back office
 
 email: alexandre@loubeyres.fr
 password: mdpTest123

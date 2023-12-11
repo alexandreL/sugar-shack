@@ -52,7 +52,7 @@ const changePage = async (newPage: number) => {
             @change="loadProducts"
           >
             <option selected value="">
-              Tous les couleurs de sirop
+              Toutes les couleurs de sirop
             </option>
             <option v-for="type in Object.values(SyrupType)" :key="type" :value="type">
               {{ type }}
