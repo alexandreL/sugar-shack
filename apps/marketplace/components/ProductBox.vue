@@ -15,6 +15,10 @@ const showModal = () => {
     const modal = document.getElementById('my_modal_2') as HTMLDialogElement
     modal.showModal()
 }
+
+const isInStock = () => {
+    return product.stock! > 0
+}
 </script>
 <template>
   <div>
@@ -31,8 +35,15 @@ const showModal = () => {
         <p class="mt-1">
           ${{ product.price }}
         </p>
+        <span
+          v-if="!isInStock()"
+          class="badge badge-secondary"
+        >
+          En rupture de stock
+        </span>
         <div class="card-actions justify-end">
           <button
+            :disabled="!isInStock()"
             class="btn btn-primary"
             @click="addToCart()"
           >

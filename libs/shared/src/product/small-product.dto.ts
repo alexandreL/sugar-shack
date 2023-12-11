@@ -18,6 +18,9 @@ export class SmallProductDto {
     @IsInt()
     stock?: number
 
+    @IsInt()
+    maxStock?: number
+
     @IsEnum(SyrupType)
     syrupType?: SyrupType
 }

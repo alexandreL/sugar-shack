@@ -22,7 +22,9 @@ const loadProduct = async () => {
     clearTimeout(timeoutId)
     loading.value = false
 }
-
+const isInStock = () => {
+    return product.stock! > 0
+}
 </script>
 <template>
   <div>
@@ -52,9 +54,15 @@ const loadProduct = async () => {
           prix:
           ${{ product.price }}
         </p>
-
+        <span
+          v-if="!isInStock()"
+          class="badge badge-secondary"
+        >
+          En rupture de stock
+        </span>
         <div class="card-actions justify-end">
           <button
+            :disabled="!isInStock()"
             class="btn btn-primary"
             @click="addToCart()"
           >
